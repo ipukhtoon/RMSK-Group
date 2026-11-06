@@ -83,3 +83,19 @@ Detailed permissions must be least-privilege and configurable by role.
 ## Acceptance
 
 A feature is not implementation-ready until its user flows, permissions, data ownership, failure modes, audit requirements, integration behavior, security implications and testable acceptance criteria are documented and approved.
+
+
+### A1. ISP registration, approval and tenant provisioning
+- Public ISP application is separate from tenant creation, approval and paid subscription activation.
+- Collect business/ISP name, owner/applicant details, verified contact channels, country, city, operating districts, access technology, optional estimated subscriber scale, existing management system, preferred operating model and relevant business/licensing information.
+- Verify applicant contact channels using an approved verification method.
+- New applications enter **Pending** and are reviewed by authorized RMSK platform staff.
+- Application states: Pending, Under Review, Additional Information Required, Approved, Rejected and Suspended.
+- Approval/rejection and material review actions must be attributable to an authorized staff account and audited.
+- Do not represent an applicant as a legally licensed ISP merely because RMSK approved its platform application. Verify relevant licensing claims where applicable; record evidence and review status.
+- Only after approval may the platform provision a tenant with a unique tenant ID, initial ISP owner account and isolated tenant configuration.
+- Tenant provisioning must be idempotent and recoverable; partial failures must not create duplicate tenants or orphaned owner accounts.
+- After provisioning, the ISP owner completes an onboarding wizard covering business profile, branding, operating model, network configuration, integrations/Bridge where applicable, packages, payment configuration, staff invitations and go-live checks.
+- Native setup must be optional for integrated-mode ISPs; do not force migration or duplicate data entry for an existing backend where avoidable.
+- Keep three distinct lifecycle concepts: **application status**, **tenant lifecycle status**, and **RMSK SaaS subscription/billing status**. Approval does not automatically mean paid subscription activation or operational go-live.
+- Exact required fields, evidence, verification methods, approval authority, subscription plans, pricing, grace periods and go-live criteria remain to be specified.
