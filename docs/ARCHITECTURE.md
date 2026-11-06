@@ -50,3 +50,15 @@ For each tenant and integration, define the authoritative system for subscriber 
 ## Architecture decisions still open
 
 Cloud provider, programming languages/frameworks, database technology, queue/event technology, deployment topology, API protocol details, tenancy model (shared schema/database vs isolated resources), encryption/key management and exact service boundaries require architecture review and owner approval.
+
+
+## ISP application, approval and provisioning flow
+- Model ISP applications separately from tenant records and SaaS subscription records.
+- A public application is stored in a restricted platform-level context; it is not itself a tenant.
+- Authorized platform staff review and decide applications. Record reviewer, timestamps, decision, reason and supporting verification evidence with appropriate access controls.
+- On approval, execute an idempotent provisioning workflow that creates the tenant boundary, unique tenant identifier, initial owner membership/account and default configuration.
+- Provisioning must be transactional where possible; otherwise use a durable workflow with compensating/recovery steps and duplicate prevention.
+- Keep application, tenant lifecycle and subscription lifecycle state machines separate.
+- The owner onboarding wizard configures the tenant after provisioning. Steps are conditional on Native, Integrated or Hybrid operating mode.
+- Tenant isolation controls apply from the first provisioned record onward; no client-supplied tenant identifier is trusted as authorization.
+- No tenant is automatically marked paid or live solely because its application is approved.
