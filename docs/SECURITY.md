@@ -48,3 +48,15 @@
 ## Compliance
 
 Obtain Pakistani legal, privacy, telecom and payment compliance advice appropriate to the actual services, contracts and data processed. This document is not legal advice and does not assert compliance certification.
+
+
+## Multi-tenant isolation controls
+- Initial model: shared PostgreSQL database and shared tenant-owned tables, with a unique permanent UUID tenant identifier per ISP.
+- Enforce tenant authorization in NestJS using authenticated identity, explicit tenant membership and per-tenant permissions. Never trust client-provided tenant IDs.
+- Enforce database isolation with PostgreSQL RLS that fails closed when trusted tenant context is missing, invalid or revoked.
+- Use tenant-aware composite constraints and foreign keys to prohibit cross-tenant relationships.
+- Keep user identity separate from tenant membership. Authorize each membership independently; isolate platform-level identities/data and audit privileged access.
+- Scope cache, jobs, events, WebSockets, payment callbacks, Bridge identities, notifications, files, reports and exports to the verified tenant.
+- Prevent tenant context leakage across pooled database connections and concurrent requests; use a safe transaction-scoped context and test Prisma/pool behavior.
+- Require automated negative tests for cross-tenant reads, writes, relationship manipulation, exports and asynchronous access before production.
+- Detailed schema, RLS policies, context propagation and test implementation remain pending design/review; documentation does not imply implementation.
