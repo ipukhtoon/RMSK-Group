@@ -78,3 +78,16 @@ Do not mark a requirement implemented or verified based only on documentation.
 | TEN-017 | Platform support and break-glass access use scoped, time-limited, reason-coded and audited grants | Proposed | ARCHITECTURE, SECURITY | Authorization, expiry and audit tests |
 | TEN-018 | Provisioning, suspension, offboarding and recovery have idempotent workflows and tested lifecycle safeguards | Proposed | ARCHITECTURE, TENANCY_AND_DATA | Retry, lifecycle and restore-drill tests |
 | TEN-019 | Production security gate includes adversarial tenant-isolation tests and independent security review | Proposed | SECURITY, TESTING_AND_ACCEPTANCE | Release checklist and review evidence |
+
+
+## Goldfish planning improvements (proposed; pending owner approval)
+
+| ID | Requirement / planning control | Status | Primary document | Future verification |
+|---|---|---|---|---|
+| GQA-018 | ISP discovery must use a structured, non-leading interview and evidence record | Proposed | PRODUCT_DISCOVERY_AND_MVP | Review completed, consented discovery records |
+| GQA-019 | MVP selection must use evidence, documented scoring, hard safety gates and owner approval | Proposed | PRODUCT_DISCOVERY_AND_MVP, ROADMAP | Approved MVP decision record |
+| GQA-020 | Every substantial workflow must specify actor, permissions, data authority, states, failure/recovery, audit and acceptance tests | Proposed | GOLDEN_JOURNEYS, TESTING_AND_ACCEPTANCE | Journey review and executable acceptance suite |
+| GQA-021 | Native/Integrated/Hybrid source-of-truth and action authority must be explicit per domain before writes | Proposed | GOLDEN_JOURNEYS, INTEGRATIONS_AND_BRIDGE | Tenant-specific mapping and conflict/reconciliation tests |
+| GQA-022 | Payment confirmation, invoice allocation and service activation remain distinct stateful operations | Proposed refinement | GOLDEN_JOURNEYS, PAYMENTS_AND_LEDGER | Duplicate/out-of-order callback, allocation and activation tests |
+| GQA-023 | Pilot scope must include rollback/exit plan, support owner and baseline-backed success measures | Proposed | PRODUCT_DISCOVERY_AND_MVP | Approved pilot charter and measured review |
+| GQA-024 | No runtime/test/market validation claim without reproducible evidence | Approved workflow constraint proposed for adoption | WORKFLOW, TESTING_AND_ACCEPTANCE | Evidence-linked stage run records |
