@@ -41,3 +41,14 @@ For every future explicitly approved feature or business/technical decision, add
 - Recorded that this is a technology-direction decision, not an implementation or production-readiness claim.
 - Left tenant schema strategy, exact RLS policies, Supabase plan, Redis provider, deployment topology, pooling, backups and production sizing open for detailed design.
 - Updated architecture, tenancy/data, decision log and requirements traceability. No application code was implemented by this documentation change.
+
+## 2026-11-06 — Shared-table multi-tenant isolation architecture approved
+- Approved one shared PostgreSQL database and shared tenant-owned tables as the initial model, with a unique permanent UUID tenant identifier for each ISP.
+- Approved defence in depth: NestJS server-side identity, membership and permission checks; PostgreSQL RLS that fails closed; and tenant-aware composite constraints/foreign keys.
+- Required explicit user-to-tenant membership; user identity is not itself a tenant, and multi-tenant membership is independently authorized.
+- Required tenant scoping across queries, cache, jobs, events, WebSockets, payment callbacks, Bridge identities, notifications, files, reports and exports.
+- Required safe transaction-scoped tenant context with no leakage through Prisma/database connection pooling.
+- Required automated cross-tenant negative tests, including relationship manipulation, missing/invalid context and pooled connection reuse.
+- Preserved a future option for dedicated database isolation tiers for larger tenants.
+- Recorded detailed schema, exact RLS policies, trusted context mechanism, membership/role schema and test implementation as pending architecture work.
+- Updated architecture, tenancy/data, security, decision log and requirements traceability. No application code or security control was implemented by this documentation change.
