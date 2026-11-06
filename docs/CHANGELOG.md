@@ -21,3 +21,13 @@ For every future explicitly approved feature or business/technical decision, add
 - Which documents/requirements changed.
 - Whether implementation is proposed, underway, implemented or verified.
 - Tests or evidence, when applicable.
+
+
+## 2026-11-06 — ISP registration and onboarding approved
+- Approved a controlled ISP application workflow with contact verification and authorized RMSK review.
+- Approved application states: Pending, Under Review, Additional Information Required, Approved, Rejected and Suspended.
+- Approved tenant and initial owner provisioning only after application approval, with idempotency and recovery safeguards.
+- Approved a mode-aware onboarding wizard for business profile, branding, operating model, network configuration, integrations/Bridge, packages, payment configuration, staff and go-live checks.
+- Required separate application, tenant lifecycle and SaaS subscription/billing states; approval alone does not activate a paid subscription or mark an ISP live.
+- Updated PRD, architecture, decision log and requirements traceability.
+- This is a documented product requirement; no application code has been implemented.
