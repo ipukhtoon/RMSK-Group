@@ -171,3 +171,13 @@ Goldfish QA is mandatory for substantial user-facing features and workflows. For
 - **Scope limitation:** Documentation-only audit of the current main-branch planning files. No running UI, source code, database, payment integration, Bridge or deployment was tested.
 - **Primary report:** [Goldfish QA audit](GOLDFISH_AUDIT.md).
 - **Run evidence:** stage playbooks 01–03; report commit ec21b7506b27c37e1b0042ab74e65deaa59831ca.
+
+
+## Updated active workstream — GQA-PLAN-01
+- **Stage 1 Architect:** Completed — documentation inventory and persona journey mapping.
+- **Stage 2 Critical Reviewer:** Completed — 17 planning findings (8 High, 9 Medium).
+- **Stage 3 Improvement:** Completed — added a structured discovery/MVP framework and seven detailed golden journey specifications; finding-to-improvement dispositions recorded.
+- **Stage 4 Owner Approval:** Pending — no MVP, first integration, detailed journeys or new planning proposals are approved by this update.
+- **Stage 5 Implementation & Verification:** Not started — no application code, live service, database, payment or Bridge behavior was tested or changed.
+- **New planning documents:** [Product Discovery and MVP](PRODUCT_DISCOVERY_AND_MVP.md); [Golden User Journeys](GOLDEN_JOURNEYS.md); [Goldfish Audit](GOLDFISH_AUDIT.md).
+- **Next gate:** Owner reviews the improved planning package. If approved, conduct evidence-gathering discovery; do not invent interview findings or select a first integration without evidence.
