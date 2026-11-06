@@ -75,3 +75,10 @@ For every future explicitly approved feature or business/technical decision, add
 - Added docs/GOLDFISH_AUDIT.md with persona walkthroughs, 17 prioritized findings, proposed solutions, seven golden journeys and readiness gates.
 - Recorded the audit in Stage 1–3 run histories and the central workflow tracker.
 - **Status:** Documentation audit completed; recommendations pending owner approval. No application code or runtime tests were performed.
+
+
+## 2026-11-06 — Goldfish audit improvement and MVP planning framework
+- Added a structured Pakistan ISP discovery guide, evidence record, weighted MVP scoring method, hard safety gates and pilot decision record.
+- Added seven golden user journeys with actor, authority, state, failure/recovery and acceptance examples.
+- Added a finding-to-improvement disposition for all 17 Goldfish audit findings and updated the PRD, roadmap, traceability and workflow tracker.
+- **Status:** Stage 3 improvement documentation completed; Stage 4 owner approval pending. No ISP interviews, MVP selection, integration certification, application implementation or runtime tests are claimed.
