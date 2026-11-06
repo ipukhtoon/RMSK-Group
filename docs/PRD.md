@@ -99,3 +99,10 @@ A feature is not implementation-ready until its user flows, permissions, data ow
 - Native setup must be optional for integrated-mode ISPs; do not force migration or duplicate data entry for an existing backend where avoidable.
 - Keep three distinct lifecycle concepts: **application status**, **tenant lifecycle status**, and **RMSK SaaS subscription/billing status**. Approval does not automatically mean paid subscription activation or operational go-live.
 - Exact required fields, evidence, verification methods, approval authority, subscription plans, pricing, grace periods and go-live criteria remain to be specified.
+
+
+## Product discovery and golden journey specifications
+
+The detailed method for validating target ISP needs and selecting a bounded first MVP is maintained in [Product Discovery and MVP Definition](PRODUCT_DISCOVERY_AND_MVP.md). The common actor/permission/state/failure/acceptance contract and seven proposed end-to-end journeys are maintained in [Golden User Journeys](GOLDEN_JOURNEYS.md).
+
+These documents are planning specifications only. They do not establish that interviews have occurred, select the first pilot mode/vendor/integration, approve pricing, or authorize implementation. Each journey must be narrowed to an approved scope and have its data ownership, permissions, failure recovery and acceptance tests finalized before implementation.
