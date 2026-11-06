@@ -53,3 +53,7 @@ Goldfish QA is mandatory for substantial user-facing workflows and is integrated
 
 ### Scenario record
 For each applicable scenario record: run ID; persona; goal; preconditions and permissions; steps; expected outcome; actual outcome; status (Passed/Failed/Blocked/Not Run/Not Applicable); evidence; severity and defect reference; recovery behavior. For planning stages, label results as predicted/design review rather than tested.
+
+
+## Planning audit reference
+The documentation-only Goldfish QA planning audit is recorded in [GOLDFISH_AUDIT.md](GOLDFISH_AUDIT.md). Its predicted persona findings are not runtime test results. Convert approved journey specifications into executable acceptance tests during implementation and verification.
