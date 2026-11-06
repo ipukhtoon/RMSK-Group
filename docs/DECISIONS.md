@@ -79,3 +79,13 @@ Record decisions that the owner explicitly approves. Proposals and research find
 - **Not decided:** Tenant schema/partitioning strategy, exact RLS policies, Supabase plan, Redis hosting/provider, deployment platform/topology, connection-pool settings, backup/recovery configuration, production sizing and implementation details.
 - **Rationale:** Establish a maintainable, strongly typed backend and relational data foundation while retaining integration flexibility and avoiding unnecessary provider lock-in.
 
+
+## D-017 — Shared-table multi-tenant isolation architecture
+- **Status:** Approved high-level architecture; detailed design and implementation pending
+- **Decision:** Start with one shared PostgreSQL database and shared tenant-owned tables. Assign every ISP a unique, permanent UUID tenant identifier (`tenant_id`). Protect tenant data through defence in depth: NestJS server-side authentication/authorization and membership checks; PostgreSQL Row-Level Security (RLS) that fails closed; and tenant-aware composite constraints and foreign keys.
+- **Identity model:** A user account is distinct from an ISP tenant. Tenant membership is explicit. A user may belong to multiple ISPs only when separately authorized for each tenant. Platform-level identities/data are separate from tenant-owned data, and privileged platform access is narrowly scoped and audited.
+- **Coverage:** Isolation applies to database records and relationships, cache, BullMQ jobs, events, WebSockets, payment callbacks, Bridge identities, notifications, files, reports and exports. Tenant context must not leak across pooled database connections or concurrent requests.
+- **Testing requirement:** Automated negative tests must prove cross-tenant reads, writes, relationship creation, exports and asynchronous access are denied, including missing/invalid tenant context and pooled connection reuse.
+- **Evolution:** Preserve the option of dedicated databases or stronger isolation tiers for larger tenants.
+- **Not decided:** Full table/schema inventory, exact RLS SQL and trusted context mechanism, Prisma transaction/pooling implementation, membership/role schema, platform-admin break-glass workflow, migration procedure and detailed test suite.
+- **Rationale:** Multiple independent barriers ensure a missed application filter or guessed identifier cannot expose or associate another ISP's private data.
