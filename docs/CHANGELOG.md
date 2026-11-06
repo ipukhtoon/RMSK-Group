@@ -52,3 +52,13 @@ For every future explicitly approved feature or business/technical decision, add
 - Preserved a future option for dedicated database isolation tiers for larger tenants.
 - Recorded detailed schema, exact RLS policies, trusted context mechanism, membership/role schema and test implementation as pending architecture work.
 - Updated architecture, tenancy/data, security, decision log and requirements traceability. No application code or security control was implemented by this documentation change.
+
+
+## 2026-11-06 — Stage 3 detailed database architecture improvements documented
+- Completed the Improvement stage following the independent Critical Reviewer assessment.
+- Refined the proposal for transaction-local tenant context, explicitly documenting that a freely settable PostgreSQL custom setting is not an unforgeable boundary against a compromised application/database role.
+- Added database runtime/migration/operations credential separation, RLS policy-composition safeguards, composite relationship enforcement and Prisma transaction/pool requirements.
+- Expanded tenant-boundary requirements for BullMQ jobs, payment callbacks, Bridge installations, cache, search, files, WebSockets, notifications, reports and exports.
+- Added scoped platform support and break-glass access, idempotent provisioning, migration/recovery safeguards and adversarial security verification gates.
+- Added proposed traceability requirements TEN-010 through TEN-019.
+- **Status:** Stage 3 proposal only; pending explicit owner approval in Stage 4. No new approved decision, application code, database schema, RLS policy, credential or infrastructure change was made. Existing D-016 and D-017 approvals remain unchanged.
