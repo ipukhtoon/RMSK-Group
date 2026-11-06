@@ -69,3 +69,7 @@ Every substantial workstream follows the five mandatory stages, with a dedicated
 
 ## Goldfish QA
 The five-stage workflow includes **Goldfish QA** as a mandatory cross-stage review lens. It simulates relevant first-time visitors, ISP applicants/owners, staff roles, subscribers, platform support, mobile/constrained-connectivity users and confused/misuse scenarios. It is integrated into all five stages; it is not a separate sixth stage. See [Owner workflow](docs/WORKFLOW.md) and [Testing & acceptance](docs/TESTING_AND_ACCEPTANCE.md).
+
+
+## Planning quality review
+A documentation-only Goldfish QA review of the product plan is recorded in [Goldfish QA — Repository and Product Planning Audit](docs/GOLDFISH_AUDIT.md). It identifies persona journey gaps, planning risks and a prioritized path toward an implementation-ready MVP. Findings are proposals, not approved product changes; no application code or runtime behavior was tested.
