@@ -52,3 +52,16 @@ These Markdown files are the project’s source of truth for approved product di
 - [Decision log](docs/DECISIONS.md)
 - [Requirements traceability](docs/REQUIREMENTS_TRACEABILITY.md)
 - [Changelog](docs/CHANGELOG.md)
+
+
+## Five-stage project control
+
+Every substantial workstream follows the five mandatory stages, with a dedicated playbook and run history:
+- [Stage 1 — Architect](docs/stages/01-ARCHITECT.md)
+- [Stage 2 — Critical Reviewer](docs/stages/02-CRITICAL-REVIEWER.md)
+- [Stage 3 — Improvement](docs/stages/03-IMPROVEMENT.md)
+- [Stage 4 — Owner Approval](docs/stages/04-OWNER-APPROVAL.md)
+- [Stage 5 — Implementation & Verification](docs/stages/05-IMPLEMENTATION-VERIFICATION.md)
+- [Workflow and current run tracker](docs/WORKFLOW.md)
+
+**Tracking rule:** After every stage run, update its run history and the central tracker with the outcome, status, evidence, unresolved issues and commit reference. Approval is scope-specific; no implementation starts before explicit Stage 4 approval.
