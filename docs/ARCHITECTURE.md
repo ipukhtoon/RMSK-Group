@@ -1,10 +1,35 @@
 # Architecture
 
-**Status:** Direction approved; detailed technology choices and implementation are not yet approved.
+**Status:** Product and technology directions approved; detailed implementation, deployment topology and security validation remain pending.
+
+## Approved backend and database foundation
+
+The owner has approved the following proposed foundation for RMSK Group:
+
+- **Backend framework:** NestJS on Node.js with TypeScript.
+- **Primary database engine:** PostgreSQL.
+- **Managed PostgreSQL provider:** Supabase, initially as the hosting/management layer for PostgreSQL.
+- **ORM and database access:** Prisma.
+- **Cache and queue infrastructure:** Redis with BullMQ for background jobs and asynchronous processing.
+- **Local ISP integration agent:** Go-based RMSK Bridge.
+
+NestJS is the central application and business-logic authority. Prisma is the application’s database access layer. PostgreSQL is the authoritative relational data store for RMSK-owned platform and tenant data, subject to explicit source-of-truth rules for integrated ISP systems.
+
+Supabase is selected as the initial managed PostgreSQL provider, not as a requirement to build the application around Supabase-specific authentication, functions, realtime or other proprietary services. Keep application logic and data access portable so the PostgreSQL database can be hosted elsewhere if business, cost, reliability or scaling requirements later justify a move.
+
+Use appropriate pooled connections for normal application traffic and a direct database connection for schema migrations and administrative operations where required by the provider. Connection limits, pooling mode and Prisma compatibility must be validated before production deployment.
+
+Redis/BullMQ will handle appropriate transient cache and asynchronous job workloads; PostgreSQL remains the durable system of record. Job handlers must be idempotent, tenant-aware and observable. Do not treat Redis as the only store for critical financial or business records.
+
+The Go Bridge is a separately deployable local integration agent. It communicates with the central platform through a versioned, authenticated protocol and must follow the security and reliability requirements in the integration and security documents.
+
+**Approval boundary:** This approves the technology direction only. It does not mean the stack has been implemented, deployed, load-tested, security-reviewed or approved for production. Exact hosting topology, Supabase plan, Redis provider/hosting, deployment platform, schema design, tenant isolation implementation, backup configuration and operational sizing remain subject to detailed design and verification.
 
 ## Architectural shape
 
-A modular, multi-tenant SaaS platform with:
+Use a modular backend with clear domain boundaries. The initial application may be delivered as a modular monolith rather than prematurely splitting into microservices. Modules should have explicit interfaces and ownership so that independently scaling or extracting a component remains possible if evidence later supports it.
+
+The platform includes:
 - Web/API application layer.
 - Tenant-aware domain services.
 - Data and event layer.
@@ -49,7 +74,7 @@ For each tenant and integration, define the authoritative system for subscriber 
 
 ## Architecture decisions still open
 
-Cloud provider, programming languages/frameworks, database technology, queue/event technology, deployment topology, API protocol details, tenancy model (shared schema/database vs isolated resources), encryption/key management and exact service boundaries require architecture review and owner approval.
+Detailed domain boundaries, API contract/versioning, deployment topology, tenancy schema strategy (shared schema/database vs isolated resources), exact PostgreSQL row-level security policies, encryption/key management, Redis hosting/provider, backup and recovery configuration, scaling thresholds and exact service boundaries require further design and review. The selected database engine and initial managed PostgreSQL provider are recorded above and in the decision log.
 
 
 ## ISP application, approval and provisioning flow
