@@ -39,3 +39,7 @@ Stage 2 is complete when findings are recorded and handed to Stage 3. Record the
 | Run | Date | Workstream | Result | Evidence / commit | Status |
 |---|---|---|---|---|---|
 | DB-ARCH-01 | 2026-11-06 | Detailed database architecture | Flagged tenant-context forgery, RLS bypass/policy composition, pooled connection leakage, async tenant binding, privileged access and cross-layer isolation gaps | Findings summarized in `docs/SECURITY.md` and `docs/ARCHITECTURE.md` | Completed |
+
+
+## Goldfish QA
+Independently replay relevant journeys as a person with no internal project knowledge. At each step ask what the persona sees, understands, can do, expects next and how they know success or failure. Identify hidden assumptions, unclear labels/statuses, dead ends, permission surprises, unsafe defaults and missing recovery. Record persona, scenario, expected outcome, design gap, severity, impact and testable recommendation. This supplements, not replaces, technical and security review.
