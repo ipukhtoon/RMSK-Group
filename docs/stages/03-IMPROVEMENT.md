@@ -38,3 +38,5 @@ Stage 3 is complete when a coherent candidate is ready for explicit Stage 4 owne
 
 ## Goldfish QA
 Map each persona finding to a design improvement, acceptance criterion, accepted residual risk or explicit deferral. Improve clarity and recovery. Add positive, negative, mobile/connectivity and failure scenarios to acceptance criteria. Do not claim testing was executed when only a design walkthrough occurred.
+
+| GQA-PLAN-01 | 2026-11-06 | Repository and product-planning Goldfish audit | Proposed a prioritized five-workstream closure plan, seven golden journeys and implementation-readiness exit criteria; all new solutions remain proposals pending owner approval | `docs/GOLDFISH_AUDIT.md` (commit `ec21b7506b27c37e1b0042ab74e65deaa59831ca`) | Completed; pending owner approval |
