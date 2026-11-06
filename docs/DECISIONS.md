@@ -70,3 +70,12 @@ Record decisions that the owner explicitly approves. Proposals and research find
 - **Guardrails:** Verify contact channels; review relevant business/licensing claims where applicable; maintain audit records; use idempotent/recoverable tenant provisioning; do not force integrated-mode ISPs to migrate suitable existing backends.
 - **Not decided:** Exact form fields, document requirements, verification providers, approval policy/roles, plan names/pricing, billing terms, grace periods and go-live acceptance criteria.
 - **Rationale:** Prevent fraudulent or accidental tenant creation, preserve platform control, and separate commercial approval from technical onboarding and subscription activation.
+
+## D-016 — Backend and database technology foundation
+- **Status:** Approved technology direction; implementation and production readiness pending
+- **Decision:** Adopt NestJS (Node.js/TypeScript) as the backend framework; PostgreSQL as the primary relational database; Supabase as the initial managed PostgreSQL provider; Prisma as the ORM/data-access layer; Redis with BullMQ for cache and background-job processing; and Go for the local RMSK Bridge.
+- **Architecture guardrails:** NestJS remains the central business-logic and application authority. Supabase is selected for managed PostgreSQL hosting, not as a requirement to depend on Supabase-specific authentication, functions or other services. Keep the application portable to another PostgreSQL provider. PostgreSQL remains the durable system of record; Redis is not the sole store for critical business or financial records. Background jobs must be tenant-aware, idempotent and observable.
+- **Tenant security:** Enforce tenant isolation server-side. Evaluate PostgreSQL row-level security as defense in depth; exact policies and implementation remain subject to security review and testing.
+- **Not decided:** Tenant schema/partitioning strategy, exact RLS policies, Supabase plan, Redis hosting/provider, deployment platform/topology, connection-pool settings, backup/recovery configuration, production sizing and implementation details.
+- **Rationale:** Establish a maintainable, strongly typed backend and relational data foundation while retaining integration flexibility and avoiding unnecessary provider lock-in.
+
