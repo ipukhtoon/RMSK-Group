@@ -62,3 +62,44 @@ A future dedicated-database or stronger isolation tier may be introduced for lar
 
 ### Detailed design still required
 Complete table inventory and schema, membership/role model, exact RLS SQL and context mechanism, Prisma transaction/pooling patterns, composite key conventions, platform support/break-glass access, migrations and automated test suite must pass the Architect, Critical Reviewer and Improvement stages before implementation.
+
+
+## Stage 3 — Refined tenant isolation proposal (pending owner approval)
+
+This is an improved proposal for review, not an approved implementation specification.
+
+### Tenant context and RLS limitations
+- NestJS must derive tenant scope from the authenticated principal and a verified, active membership; a tenant ID in a URL, header, request body, job payload or callback is only a selector, never authorization.
+- Resolve the membership and permission before opening a tenant-scoped transaction. Define how membership revocation is handled for long-running requests and queued work.
+- Establish tenant context transaction-locally on the same Prisma transaction/connection used for all tenant queries. Never use session-level tenant state with pooled connections.
+- Important limitation: a custom PostgreSQL setting such as `app.tenant_id` can generally be changed by a database session that has permission to run `set_config`. RLS that trusts only this value protects against forgotten tenant filters, but does not stop a compromised application process or arbitrary SQL running as that role from asserting another tenant. The context mechanism and threat boundary must be explicitly approved after a proof of concept; do not call a freely settable setting an unforgeable identity.
+- Fail closed when context is missing, invalid or revoked. No tenant rows should be visible and tenant writes should fail.
+
+### PostgreSQL policy and role requirements
+- Runtime API and worker roles must not own tenant tables, be superusers or have `BYPASSRLS`; separate them from migration, backup/restore and controlled operations credentials.
+- Enable RLS on every tenant-owned table; assess `FORCE ROW LEVEL SECURITY` and document any unavoidable privileged bypass.
+- Design policies to avoid accidental widening. PostgreSQL permissive policies combine with OR; restrictive policies combine with AND. Keep the tenant boundary restrictive and action-specific grants narrow.
+- Define `USING` and `WITH CHECK` behavior for SELECT, INSERT, UPDATE and DELETE. Test row movement attempts (changing `tenant_id`) and missing context.
+- Use explicit table classification: tenant-owned, platform-owned, or shared/reference data. Each class gets a documented authorization policy; avoid ambiguous unscoped tables.
+
+### Relationship integrity
+- Every tenant-owned parent and child carries a non-null tenant ID.
+- Use composite uniqueness such as `UNIQUE (tenant_id, id)` and composite foreign keys such as `(tenant_id, customer_id) REFERENCES customers (tenant_id, id)`.
+- Apply the same rule to invoice items, payment allocations, services, devices, integration records, audit references and other tenant-owned relationships.
+- Prisma schema and migration output must be inspected to confirm the database actually enforces the composite constraints; application-level checks are not a substitute.
+
+### Tenant context across asynchronous and data layers
+- BullMQ jobs and events must include a tenant binding and idempotency/correlation identifiers, then revalidate tenant/entity ownership when consumed. A queue payload is not proof of authorization.
+- Payment callbacks must resolve the tenant through verified merchant/provider configuration and transaction records, not a freely supplied tenant field.
+- Bridge credentials and installations must be permanently bound to one tenant and revocable independently.
+- Cache keys, search indexes/filters, WebSocket channels, notification routing, object-storage paths, exports and report generation must be tenant-namespaced and independently authorization-checked.
+- Signed file links must be short-lived and issued only after tenant authorization. Logs must redact PII, secrets and network credentials.
+
+### Tenant lifecycle and recoverability
+- Provisioning must be idempotent and resumable, with uniqueness constraints preventing duplicate tenant, owner and membership records.
+- Model application, tenant lifecycle and SaaS subscription states separately. Define the effect of suspension on staff access, subscriber portal, payments, jobs, Bridge commands and exports.
+- Define retention, export, deletion and offboarding rules before launch. Preserve financial and audit records as legally/contractually required.
+- Backups, point-in-time recovery, restore drills, RPO/RTO and tenant export verification must be specified and tested. Do not claim a tenant can be restored independently unless the selected backup/restore design proves it.
+
+### Mandatory negative tests
+Test two or more tenants with deliberately overlapping local identifiers and attempt cross-tenant reads, writes, deletes, row moves, relationship creation, exports, file access, search, cache lookup, WebSocket subscription, callback replay, Bridge command, job execution and tenant switching. Also test no context, malformed context, revoked membership, forged context, concurrent requests, pooled connection reuse, transaction rollback and timeout cleanup.
