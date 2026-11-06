@@ -160,3 +160,14 @@ Goldfish QA is mandatory for substantial user-facing features and workflows. For
 - Date: 2026-11-06
 - Result: Cross-stage method documented; no product journeys or application code were tested by this documentation change.
 - Evidence: stage playbooks and `docs/TESTING_AND_ACCEPTANCE.md`.
+
+
+## Active workstream — GQA-PLAN-01 (repository and product-planning audit)
+- **Stage 1 Architect:** Completed — documentation inventory and persona journey mapping.
+- **Stage 2 Critical Reviewer:** Completed — 17 findings classified; 8 High, 9 Medium.
+- **Stage 3 Improvement:** Completed — prioritized closure plan, seven golden journeys and readiness gates proposed.
+- **Stage 4 Owner Approval:** Pending — audit recommendations have not been approved.
+- **Stage 5 Implementation & Verification:** Not started — no application code or product behavior was tested or changed.
+- **Scope limitation:** Documentation-only audit of the current main-branch planning files. No running UI, source code, database, payment integration, Bridge or deployment was tested.
+- **Primary report:** [Goldfish QA audit](GOLDFISH_AUDIT.md).
+- **Run evidence:** stage playbooks 01–03; report commit ec21b7506b27c37e1b0042ab74e65deaa59831ca.
