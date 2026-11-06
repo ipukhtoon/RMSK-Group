@@ -51,3 +51,27 @@ After every explicitly approved feature or business/technical decision:
 ## Working style
 
 Prefer complete, copy-paste-ready artifacts and direct actionable instructions. Do not invent connected tools or completed actions. Preserve existing functionality unless the owner approves a change.
+
+
+## Stage-by-stage run tracking
+
+The detailed stage playbooks live in `docs/stages/`:
+1. [Architect](stages/01-ARCHITECT.md)
+2. [Critical Reviewer](stages/02-CRITICAL-REVIEWER.md)
+3. [Improvement](stages/03-IMPROVEMENT.md)
+4. [Owner Approval](stages/04-OWNER-APPROVAL.md)
+5. [Implementation & Verification](stages/05-IMPLEMENTATION-VERIFICATION.md)
+
+### Mandatory run-record rule
+After **every stage run**, update that stage's run history and this workflow's current project tracker in the same documentation update cycle. Record date, workstream/run ID, scope, outcome, status, unresolved blockers, evidence/tests (if any), affected documents and commit reference. Update the next stage's status and the project README/changelog when the overall project state materially changes.
+
+Use these status labels consistently: `Not started`, `In progress`, `Completed`, `Pending owner approval`, `Blocked`, `Deferred`, `Rejected`. Stage completion does not mean owner approval or implementation completion.
+
+### Current active workstream — DB-ARCH-01
+- **Stage 1 Architect:** Completed — detailed database architecture proposal documented.
+- **Stage 2 Critical Reviewer:** Completed — security and reliability findings recorded.
+- **Stage 3 Improvement:** Completed — refined proposal documented; owner approval pending.
+- **Stage 4 Owner Approval:** Pending — no approval of the improved detailed design recorded.
+- **Stage 5 Implementation & Verification:** Not started — no implementation authorized or performed.
+- **Current gate:** Await explicit owner approval of the refined Stage 3 database architecture scope before implementation planning or code changes.
+- **Evidence:** Stage playbooks and the Stage 3 updates listed in their run histories.
