@@ -45,3 +45,11 @@ Do not mark a requirement implemented or verified based only on documentation.
 | ONB-004 | Separate application, tenant and SaaS subscription lifecycle states | Approved | PRD, ARCHITECTURE, PAYMENTS_AND_LEDGER | State-transition and billing-isolation tests |
 | ONB-005 | Mode-aware ISP onboarding wizard; do not force existing-backend migration | Approved | PRD, ARCHITECTURE | Native/Integrated/Hybrid onboarding acceptance tests |
 | ONB-006 | Keep exact fields, verification policy, pricing and go-live criteria open until specified | Approved constraint | PRD, DECISIONS | Review detailed specifications before implementation |
+
+| TECH-001 | NestJS (Node.js/TypeScript) as the central backend framework and business-logic authority | Approved technology direction | ARCHITECTURE, DECISIONS | Architecture review, API and integration tests |
+| TECH-002 | PostgreSQL as primary relational database, initially hosted/managed by Supabase | Approved technology direction | ARCHITECTURE, TENANCY_AND_DATA, DECISIONS | Migration, connection, backup/restore and performance tests |
+| TECH-003 | Prisma as backend ORM/data-access layer | Approved technology direction | ARCHITECTURE, DECISIONS | Migration and query tests |
+| TECH-004 | Redis with BullMQ for cache and asynchronous background jobs | Approved technology direction | ARCHITECTURE, DECISIONS | Retry, idempotency, tenant-context and failure-recovery tests |
+| TECH-005 | Go-based local RMSK Bridge | Approved technology direction | ARCHITECTURE, INTEGRATIONS_AND_BRIDGE, DECISIONS | Protocol, security, offline queue and adapter integration tests |
+| TECH-006 | Avoid Supabase-specific application lock-in; preserve PostgreSQL portability | Approved constraint | ARCHITECTURE, DECISIONS | Review application dependencies and provider migration path |
+
