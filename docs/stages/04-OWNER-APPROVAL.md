@@ -41,3 +41,7 @@ Proceed to Stage 5 only for the exact approved scope. Update `docs/WORKFLOW.md`,
 | Run | Date | Workstream | Decision | Evidence | Status |
 |---|---|---|---|---|---|
 | DB-ARCH-01 | 2026-11-06 | Detailed database architecture | No Stage 3 approval recorded yet | Stage 3 proposal in architecture, tenancy and security documents | Pending |
+
+
+## Goldfish QA
+Include relevant personas and critical journeys, important findings, unresolved usability/accessibility/recovery risks, mitigations and exclusions in the approval package. Persona feedback informs the owner's decision; it does not approve work automatically.
