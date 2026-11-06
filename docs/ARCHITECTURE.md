@@ -74,7 +74,7 @@ For each tenant and integration, define the authoritative system for subscriber 
 
 ## Architecture decisions still open
 
-Detailed domain boundaries, API contract/versioning, deployment topology, tenancy schema strategy (shared schema/database vs isolated resources), exact PostgreSQL row-level security policies, encryption/key management, Redis hosting/provider, backup and recovery configuration, scaling thresholds and exact service boundaries require further design and review. The selected database engine and initial managed PostgreSQL provider are recorded above and in the decision log.
+Detailed domain boundaries, API contract/versioning, deployment topology, exact RLS policies and tenant-context propagation, encryption/key management, Redis hosting/provider, backup and recovery configuration, scaling thresholds and exact service boundaries require further design and review. The initial shared-database/shared-table tenancy model is approved; exact implementation remains open. The selected database engine and initial managed PostgreSQL provider are recorded above and in the decision log.
 
 
 ## ISP application, approval and provisioning flow
@@ -87,3 +87,20 @@ Detailed domain boundaries, API contract/versioning, deployment topology, tenanc
 - The owner onboarding wizard configures the tenant after provisioning. Steps are conditional on Native, Integrated or Hybrid operating mode.
 - Tenant isolation controls apply from the first provisioned record onward; no client-supplied tenant identifier is trusted as authorization.
 - No tenant is automatically marked paid or live solely because its application is approved.
+
+
+## Approved shared-table tenant isolation model
+
+The owner has approved one shared PostgreSQL database with shared tenant-owned tables as the initial tenancy model. Each ISP receives a unique, permanent UUID tenant identifier (`tenant_id`).
+
+- Every tenant-owned record must carry its owning tenant identifier; platform-level records are explicitly classified and separately protected.
+- NestJS derives tenant context from authenticated identity and verified membership. A client-supplied tenant ID is never proof of authorization.
+- PostgreSQL Row-Level Security (RLS) is required as a database-level isolation boundary and must fail closed when trusted tenant context is missing or invalid. RLS supplements, not replaces, NestJS authorization.
+- Tenant-aware composite unique constraints and foreign keys prevent cross-tenant relationships.
+- User identity is separate from tenant membership. Multi-tenant users require explicit membership and authorization for each active tenant. Platform access is least-privilege and audited.
+- Tenant scope applies to queries, cache, jobs, events, WebSockets, callbacks, Bridge identities, notifications, files, exports and reports.
+- Tenant context must be transaction-scoped and must not leak across Prisma/database pooled connections or concurrent requests.
+- Automated negative tests must prove cross-tenant reads, writes, relationship creation and cross-layer access are denied.
+- Preserve a future path to dedicated databases or stronger isolation tiers for larger ISPs.
+
+Exact schema, RLS SQL, trusted context mechanism, Prisma transaction/pooling pattern, membership/role schema and test implementation remain pending detailed architecture and review. This approval is not an implementation or production-readiness claim.
