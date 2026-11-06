@@ -104,3 +104,52 @@ The owner has approved one shared PostgreSQL database with shared tenant-owned t
 - Preserve a future path to dedicated databases or stronger isolation tiers for larger ISPs.
 
 Exact schema, RLS SQL, trusted context mechanism, Prisma transaction/pooling pattern, membership/role schema and test implementation remain pending detailed architecture and review. This approval is not an implementation or production-readiness claim.
+
+
+## Stage 3 — Refined detailed database architecture proposal (pending owner approval)
+
+**Status:** Improvement-stage proposal only. This section refines D-017 but does not create a new approved decision, authorize implementation, or claim that controls exist.
+
+### Security model and threat boundary
+Use three complementary layers:
+1. NestJS authenticates the principal, resolves the requested tenant from the authenticated session, verifies an active membership and the required permission, and creates a server-controlled tenant execution context.
+2. PostgreSQL RLS restricts tenant-owned rows as defence in depth, including protection against accidentally omitted tenant predicates.
+3. Tenant-aware composite keys and foreign keys prevent records from different tenants being related even when identifiers are known.
+
+RLS based on a transaction-local custom PostgreSQL setting (for example, `app.tenant_id`) is useful against accidental query-scope omissions, but it is **not by itself a security boundary against a compromised application process or arbitrary SQL executed with the application database role**: that role may be able to set a custom setting. The threat model must state this limitation explicitly. Before implementation, compare and test candidate context-assertion designs, including how the database can verify the asserted user/tenant membership, who can mint assertions, secret/key exposure, expiry and revocation. Do not describe a client-supplied or freely settable GUC as cryptographically trusted. If no stronger verifiable mechanism is selected, document the residual risk and rely on hardened NestJS authorization, parameterized queries, restricted database privileges, and defence-in-depth controls rather than overstating RLS guarantees.
+
+### Database roles and policy rules
+- Use separate credentials/roles for application runtime, migration, controlled operations, backup/restore and any reporting workload. Do not reuse a migration or owner credential in the API or worker.
+- The runtime role must not own tenant tables, be a superuser, or have `BYPASSRLS`. Revoke unnecessary DDL, role-management and schema privileges.
+- Enable RLS on every tenant-owned table and evaluate `FORCE ROW LEVEL SECURITY`; explicitly inventory unavoidable owner/superuser bypass paths.
+- Prefer restrictive tenant-boundary policies combined with narrowly scoped permissive action policies. Review PostgreSQL's policy-composition semantics: permissive policies combine with OR, while restrictive policies combine with AND. A new permissive policy must never silently widen the tenant boundary.
+- For each operation, define both row visibility/eligibility (`USING`) and resulting-row validity (`WITH CHECK`) where applicable. Missing, malformed or absent context must return no tenant rows and reject tenant writes.
+- Keep platform-level tables outside tenant policies only when their classification and separate access controls are explicit. Do not create a broad platform policy on tenant tables as a shortcut.
+
+### Prisma transaction and pool contract
+- Tenant-scoped work must execute through one interactive transaction/client and one database connection for the entire unit of work.
+- Establish context transaction-locally at the start of that transaction; never rely on session-level `SET` or state surviving a commit/rollback.
+- Resolve and authorize membership before entering the tenant transaction; re-check revocation-sensitive operations according to a defined freshness policy.
+- Prohibit tenant-scoped queries through the root Prisma client outside the approved transaction wrapper. Centralize the wrapper and make unscoped access explicit and separately reviewed.
+- API and worker traffic may use a compatible pooled connection URL. Migrations and controlled schema/administrative tasks use a direct connection. Validate the exact Supabase pool mode, Prisma version/driver adapter, prepared-statement behavior, transaction timeouts and provider limits in a proof of concept.
+- On transaction failure, timeout or cancellation, discard the request context and ensure the next borrower of a pooled connection starts with no tenant state.
+
+### Async and cross-layer tenant contract
+Every queued job, event, WebSocket subscription, payment callback, Bridge installation, notification, file/object, cache entry, search request, report and export must carry or resolve an immutable tenant binding from a trusted server-side record. Validate that binding at the point of execution/delivery; do not trust a tenant ID copied from an untrusted payload.
+- BullMQ job envelope: tenant ID, job type/version, entity reference, idempotency key, correlation ID and enqueue metadata; validate tenant/entity ownership before work.
+- Payment callback: resolve tenant using a verified provider/merchant mapping and transaction reference, then validate amount, currency, status and idempotency; never select a tenant from an arbitrary callback field alone.
+- Bridge: bind each installation credential/certificate to one tenant and installation record; enforce capability scopes, revocation, replay protection and action-level authorization.
+- Cache/search/storage/export: include tenant scope in keys, namespaces and authorization checks; use short-lived signed downloads and re-check access at download time.
+- Logs and telemetry: include safe tenant correlation identifiers where operationally needed, but redact subscriber PII, payment secrets, network credentials and tokens. Prevent tenant data from appearing in metric labels or shared error messages.
+
+### Platform access
+Separate platform operations permissions from access to ISP business data. Support access must be tenant-specific, reason-coded, time-limited, read-only by default and fully audited. Sensitive write access requires separate explicit authorization. Emergency break-glass must require strong authentication, a narrowly scoped temporary grant, reason/ticket, immutable audit trail and post-use review. Do not silently bypass RLS using a normal administrator session.
+
+### Provisioning, migrations and recovery
+- Provisioning is a durable, idempotent state machine with a unique application-to-tenant relationship and unique tenant owner membership. Each step records status and idempotency key; retries resume or safely compensate rather than create duplicates.
+- Use expand-and-contract migrations for risky changes. Apply migrations through a dedicated credential and controlled release path; test against a production-like copy and verify tenant constraints/RLS after each migration.
+- Backups must be encrypted and access-controlled. Define retention, point-in-time recovery availability, RPO/RTO and restore ownership before production. Perform scheduled restore drills, including tenant-scoped export/restore validation and financial reconciliation.
+- Tenant suspension, offboarding, deletion, legal retention and data export need explicit state transitions and safeguards; suspension must not accidentally erase financial history or revoke required audit evidence.
+
+### Required proof-of-concept and release gates
+Before production implementation approval, demonstrate: cross-tenant read/write denial; missing/invalid/forged context behavior; role and policy composition; pooled connection reuse under concurrent tenant requests; rollback/timeout cleanup; composite-FK rejection; worker tenant binding; callback replay/tenant-mismatch rejection; Bridge credential revocation; tenant-scoped files/search/exports; provisioning retry safety; and backup restoration. Record tested versions, configuration and results. Passing a local proof of concept is not a production security certification.
