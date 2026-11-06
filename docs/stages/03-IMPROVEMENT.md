@@ -40,3 +40,6 @@ Stage 3 is complete when a coherent candidate is ready for explicit Stage 4 owne
 Map each persona finding to a design improvement, acceptance criterion, accepted residual risk or explicit deferral. Improve clarity and recovery. Add positive, negative, mobile/connectivity and failure scenarios to acceptance criteria. Do not claim testing was executed when only a design walkthrough occurred.
 
 | GQA-PLAN-01 | 2026-11-06 | Repository and product-planning Goldfish audit | Proposed a prioritized five-workstream closure plan, seven golden journeys and implementation-readiness exit criteria; all new solutions remain proposals pending owner approval | `docs/GOLDFISH_AUDIT.md` (commit `ec21b7506b27c37e1b0042ab74e65deaa59831ca`) | Completed; pending owner approval |
+
+
+| GQA-PLAN-01-IMPROVE | 2026-11-06 | Improve Goldfish repository/planning audit | Converted 17 audit findings into a finding-to-improvement disposition; created structured ISP discovery/MVP scoring and hard gates; specified seven golden journeys with actor, flow, state, failure and acceptance examples; kept all market/technical/commercial decisions open pending evidence and owner approval | `docs/GOLDFISH_AUDIT.md`, `docs/PRODUCT_DISCOVERY_AND_MVP.md`, `docs/GOLDEN_JOURNEYS.md` (commits recorded in central tracker) | Completed; Stage 4 pending |
