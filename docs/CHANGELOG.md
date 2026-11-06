@@ -62,3 +62,10 @@ For every future explicitly approved feature or business/technical decision, add
 - Added scoped platform support and break-glass access, idempotent provisioning, migration/recovery safeguards and adversarial security verification gates.
 - Added proposed traceability requirements TEN-010 through TEN-019.
 - **Status:** Stage 3 proposal only; pending explicit owner approval in Stage 4. No new approved decision, application code, database schema, RLS policy, credential or infrastructure change was made. Existing D-016 and D-017 approvals remain unchanged.
+
+
+## 2026-11-06 — Goldfish QA integrated into the five-stage workflow
+- Added Goldfish QA as a mandatory cross-stage persona-based review method, not a separate sixth stage.
+- Defined first-time visitor, ISP applicant/owner, staff, subscriber, platform support, mobile/constrained-connectivity and unfamiliar/error-prone perspectives.
+- Added responsibilities to all five stage playbooks and persona-based acceptance coverage.
+- **Status:** Workflow/documentation requirement established. This change did not execute product tests or modify application code.
