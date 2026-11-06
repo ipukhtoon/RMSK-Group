@@ -59,3 +59,14 @@ Record decisions that the owner explicitly approves. Proposals and research find
 ## D-014 — Naming research scope
 - **Status:** Approved
 - **Decision:** Prioritize Pakistani company registry, Pakistani trademarks, Pakistani commercial use and .pk/.com.pk domain checks. International use is context, not automatic disqualification.
+
+
+## D-015 — Controlled ISP registration and tenant onboarding
+- **Status:** Approved product requirement / workflow direction
+- **Decision:** Provide public ISP applications followed by contact verification, authorized RMSK review and explicit approval/rejection. Provision a separate tenant and initial owner account only after approval. Then guide the ISP owner through a mode-aware onboarding wizard.
+- **Application states:** Pending, Under Review, Additional Information Required, Approved, Rejected and Suspended.
+- **Lifecycle separation:** ISP application status, tenant lifecycle status and RMSK SaaS subscription/billing status must be separate. Approval does not automatically activate a paid subscription or make the ISP operational/live.
+- **Onboarding scope:** Business profile, branding, operating model, network configuration, integrations/Bridge where applicable, packages, payment configuration, staff accounts and go-live checks.
+- **Guardrails:** Verify contact channels; review relevant business/licensing claims where applicable; maintain audit records; use idempotent/recoverable tenant provisioning; do not force integrated-mode ISPs to migrate suitable existing backends.
+- **Not decided:** Exact form fields, document requirements, verification providers, approval policy/roles, plan names/pricing, billing terms, grace periods and go-live acceptance criteria.
+- **Rationale:** Prevent fraudulent or accidental tenant creation, preserve platform control, and separate commercial approval from technical onboarding and subscription activation.
