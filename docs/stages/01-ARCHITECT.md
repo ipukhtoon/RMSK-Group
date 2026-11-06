@@ -44,3 +44,5 @@ Stage 1 is complete when the plan is sufficiently specific for an independent re
 
 ## Goldfish QA
 Identify relevant personas (first-time visitor, ISP applicant/owner, ISP administrator, frontline staff, subscriber, platform support, mobile/constrained-connectivity user and error-prone user). Map each goal, starting knowledge/permissions, end-to-end journey, success feedback, failure paths and recovery needs. Explain why a persona is not applicable. These are design scenarios, not executed tests.
+
+| GQA-PLAN-01 | 2026-11-06 | Repository and product-planning Goldfish audit | Inspected the documentation baseline and mapped first-time visitor, ISP owner, staff, subscriber, finance, support, mobile and error-prone-user journeys; identified missing journeys and planning assumptions | `docs/GOLDFISH_AUDIT.md` (commit `ec21b7506b27c37e1b0042ab74e65deaa59831ca`) | Completed; documentation-only |
