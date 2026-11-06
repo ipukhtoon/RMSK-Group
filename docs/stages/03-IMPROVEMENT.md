@@ -34,3 +34,7 @@ Stage 3 is complete when a coherent candidate is ready for explicit Stage 4 owne
 | Run | Date | Workstream | Result | Evidence / commit | Status |
 |---|---|---|---|---|---|
 | DB-ARCH-01 | 2026-11-06 | Detailed database architecture | Refined tenant-context threat boundary, DB roles, RLS policy composition, Prisma/pool contract, async/cross-layer isolation, platform access, lifecycle and release gates | GitHub commits: `623aaaa`, `6aabb6c`, `5657405`, `7b2e3a2`, `4193060` | Completed; awaiting owner approval |
+
+
+## Goldfish QA
+Map each persona finding to a design improvement, acceptance criterion, accepted residual risk or explicit deferral. Improve clarity and recovery. Add positive, negative, mobile/connectivity and failure scenarios to acceptance criteria. Do not claim testing was executed when only a design walkthrough occurred.
