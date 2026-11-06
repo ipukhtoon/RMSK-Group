@@ -2,7 +2,7 @@
 
 **RMSK Group** is the approved working identity for a Pakistan-first technology business whose first planned product is a multi-tenant SaaS platform for Internet Service Providers (ISPs).
 
-> **Project status:** Documentation and product planning. No implementation or feature is authorized merely by being documented here. Build decisions require explicit owner approval under [WORKFLOW.md](docs/WORKFLOW.md).
+> **Project status:** Documentation and product planning. The backend/database technology direction is approved, but no application implementation or production deployment is implied. Build decisions require explicit owner approval under [WORKFLOW.md](docs/WORKFLOW.md).
 
 ## Product direction
 
@@ -12,6 +12,16 @@ The platform is intended to combine:
 - A modular integration engine and lightweight **RMSK Bridge** for ISPs that want to keep their existing billing, subscriber, authentication or network systems.
 
 **Core principle:** Do not force an ISP to replace its existing backend. Support different integration methods through modular adapters, while validating each integration before claiming compatibility.
+
+## Approved technology direction
+
+- Backend: NestJS (Node.js/TypeScript).
+- Primary database: PostgreSQL, initially hosted/managed through Supabase.
+- ORM/data access: Prisma.
+- Cache and background jobs: Redis with BullMQ.
+- Local ISP integration agent: Go-based RMSK Bridge.
+
+These are approved technology choices, not claims of implementation or production readiness. Detailed tenancy/schema design, hosting plans/providers, security policies, backups and deployment topology remain to be specified and verified.
 
 ## Market focus
 
@@ -35,6 +45,7 @@ These Markdown files are the project’s source of truth for approved product di
 - [Product vision](docs/PRODUCT_VISION.md)
 - [PRD](docs/PRD.md)
 - [Architecture](docs/ARCHITECTURE.md)
+- [Tenancy and data](docs/TENANCY_AND_DATA.md)
 - [Integration and Bridge strategy](docs/INTEGRATIONS_AND_BRIDGE.md)
 - [Security](docs/SECURITY.md)
 - [Owner workflow](docs/WORKFLOW.md)
