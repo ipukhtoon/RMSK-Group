@@ -41,4 +41,24 @@ Minimize collection and access. Never store plaintext passwords, payment secrets
 
 ## Open decisions
 
-Tenant schema/partitioning strategy, exact RLS policies, encryption and key-management model, backup retention and recovery objectives, formal data-retention periods, connection-pool configuration and production sizing remain unselected pending detailed architecture and security review.
+Exact RLS policies and tenant-context propagation, encryption and key-management model, backup retention and recovery objectives, formal data-retention periods, connection-pool configuration and production sizing remain unselected pending detailed architecture and security review. The initial shared database/shared-table model with permanent UUID tenant IDs is approved.
+
+
+## Approved shared-table tenancy and isolation architecture
+
+The approved initial model is one shared PostgreSQL database with shared tenant-owned tables. Each ISP has a unique, permanent UUID tenant identifier (`tenant_id`). This is an architectural decision; no schema or security control is yet implemented.
+
+### Required controls
+- Every tenant-owned row has an explicit, required tenant owner. Platform-level records are separately classified and protected.
+- NestJS derives tenant context from the authenticated user and verified tenant membership. Never authorize from a client-supplied tenant ID.
+- PostgreSQL RLS protects tenant-owned tables and fails closed when trusted tenant context is absent, invalid or revoked. RLS is defence in depth, not a replacement for backend authorization.
+- Tenant-aware composite unique constraints and foreign keys prevent cross-tenant parent/child relationships.
+- A user account is distinct from an ISP tenant. Membership is explicit; a person may belong to multiple ISPs only with independently authorized membership in each. Platform identities/data are separate, and privileged platform access is narrowly scoped and audited.
+- Scope queries, cache keys, BullMQ jobs, events, WebSockets, payment callbacks, Bridge identities, notifications, file paths, reports and exports to the verified tenant.
+- Tenant context must be established through a trusted server-side mechanism within a safe transaction boundary. It must not leak when Prisma/database pooled connections are reused or requests run concurrently.
+- Cross-tenant access must fail closed and be covered by automated negative tests, including identifier substitution, cross-tenant relationship creation, missing/invalid context, async processing and connection reuse.
+
+A future dedicated-database or stronger isolation tier may be introduced for larger or contractually distinct ISPs. It is not required for the initial launch.
+
+### Detailed design still required
+Complete table inventory and schema, membership/role model, exact RLS SQL and context mechanism, Prisma transaction/pooling patterns, composite key conventions, platform support/break-glass access, migrations and automated test suite must pass the Architect, Critical Reviewer and Improvement stages before implementation.
