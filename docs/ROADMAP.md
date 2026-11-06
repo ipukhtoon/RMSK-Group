@@ -44,3 +44,15 @@ This is a staged planning outline, not authorization to implement.
 ## Prioritization rule
 
 Prioritize customer pain, market demand, security, reliability and integration leverage—not feature count. Each phase requires explicit owner approval before implementation.
+
+
+## Proposed discovery-to-MVP gate (pending owner approval)
+
+Before Phase 1 implementation scope is committed:
+1. Use `docs/PRODUCT_DISCOVERY_AND_MVP.md` to interview a varied set of Pakistani ISPs and record evidence, not assumptions.
+2. Select the first target segment, pilot operating mode, first integration and bounded outcome using the documented scoring method plus hard safety gates.
+3. Specify the pilot's relevant journeys using `docs/GOLDEN_JOURNEYS.md`.
+4. Resolve the pilot's source-of-truth/action-authority map, financial states, permissions, failure/recovery and acceptance tests.
+5. Approve support, rollback, legal/provider checks and measurable pilot success criteria.
+
+This is a proposed gate, not an approved selection of a particular ISP segment, mode, vendor, integration or feature scope.
