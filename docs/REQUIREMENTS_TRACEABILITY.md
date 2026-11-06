@@ -53,3 +53,12 @@ Do not mark a requirement implemented or verified based only on documentation.
 | TECH-005 | Go-based local RMSK Bridge | Approved technology direction | ARCHITECTURE, INTEGRATIONS_AND_BRIDGE, DECISIONS | Protocol, security, offline queue and adapter integration tests |
 | TECH-006 | Avoid Supabase-specific application lock-in; preserve PostgreSQL portability | Approved constraint | ARCHITECTURE, DECISIONS | Review application dependencies and provider migration path |
 
+
+| TEN-002 | Shared PostgreSQL database and shared tenant-owned tables initially, with permanent UUID tenant IDs | Approved architecture | ARCHITECTURE, TENANCY_AND_DATA, DECISIONS | Schema review and tenant ownership audit |
+| TEN-003 | NestJS membership/permission checks plus PostgreSQL RLS; fail closed without trusted tenant context | Approved architecture | TENANCY_AND_DATA, SECURITY | RLS policy and authorization negative tests |
+| TEN-004 | Tenant-aware composite constraints and foreign keys prevent cross-tenant relationships | Approved architecture | TENANCY_AND_DATA | Database constraint tests |
+| TEN-005 | User identity is separate from tenant membership; independently authorize each tenant membership | Approved architecture | TENANCY_AND_DATA, SECURITY | Membership, tenant-switch and revocation tests |
+| TEN-006 | Tenant-scope cache, jobs, events, WebSockets, callbacks, Bridge, files, reports and exports | Approved architecture | ARCHITECTURE, TENANCY_AND_DATA, SECURITY | Cross-layer isolation tests |
+| TEN-007 | Prevent tenant-context leakage across pooled connections and concurrent requests | Approved security requirement | TENANCY_AND_DATA, SECURITY | Prisma/pool concurrency and connection-reuse tests |
+| TEN-008 | Automated cross-tenant negative testing is required before production | Approved release requirement | TENANCY_AND_DATA, SECURITY | Security test suite and release gate |
+| TEN-009 | Preserve future dedicated-database isolation tier option | Approved evolution constraint | ARCHITECTURE, TENANCY_AND_DATA | Architecture review before tier introduction |
