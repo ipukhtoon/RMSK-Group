@@ -40,3 +40,7 @@ Stage 1 is complete when the plan is sufficiently specific for an independent re
 | Run | Date | Workstream | Result | Evidence / commit | Status |
 |---|---|---|---|---|---|
 | DB-ARCH-01 | 2026-11-06 | Detailed database architecture | Proposed users, tenants, memberships, RBAC, tenant tables, RLS, Prisma/pooling, platform access, provisioning, migrations and recovery | See `docs/ARCHITECTURE.md`, `docs/TENANCY_AND_DATA.md` | Completed; proposal only |
+
+
+## Goldfish QA
+Identify relevant personas (first-time visitor, ISP applicant/owner, ISP administrator, frontline staff, subscriber, platform support, mobile/constrained-connectivity user and error-prone user). Map each goal, starting knowledge/permissions, end-to-end journey, success feedback, failure paths and recovery needs. Explain why a persona is not applicable. These are design scenarios, not executed tests.
