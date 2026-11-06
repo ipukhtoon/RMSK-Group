@@ -1,0 +1,36 @@
+# Stage 3 — Improvement
+
+**Purpose:** Resolve or reduce Stage 2 findings and refine the proposal into a coherent, reviewable candidate for owner approval.
+
+## Required actions
+1. Map every reviewer finding to a proposed change, accepted residual risk or explicit deferral.
+2. Resolve critical/high blockers where possible; explain any remaining blocker.
+3. Compare alternatives and trade-offs rather than selecting a design without rationale.
+4. Preserve approved product principles and technology decisions unless a change is explicitly proposed for owner decision.
+5. Define trust boundaries, failure behavior, data ownership and security controls precisely.
+6. Add migration, rollback, recovery and compatibility considerations.
+7. Define measurable acceptance criteria and negative/adversarial tests.
+8. Update proposal documents and traceability, clearly marking content as proposed.
+9. Record what changed, why, what remains open and which reviewer findings remain unresolved.
+
+## Prohibited actions
+- Do not implement application code or infrastructure.
+- Do not treat a proposed improvement as owner-approved.
+- Do not close a reviewer finding without evidence or an explicit residual-risk decision.
+- Do not change the approved stack or scope silently.
+
+## Required output
+- Finding-to-resolution matrix.
+- Refined design and rationale.
+- Alternatives/trade-offs.
+- Remaining risks and open decisions.
+- Acceptance criteria and verification plan.
+- List of documentation changes and commit references.
+
+## Exit gate
+Stage 3 is complete when a coherent candidate is ready for explicit Stage 4 owner review. Update `docs/WORKFLOW.md` and this file after the run. No implementation permission is implied.
+
+## Run history
+| Run | Date | Workstream | Result | Evidence / commit | Status |
+|---|---|---|---|---|---|
+| DB-ARCH-01 | 2026-11-06 | Detailed database architecture | Refined tenant-context threat boundary, DB roles, RLS policy composition, Prisma/pool contract, async/cross-layer isolation, platform access, lifecycle and release gates | GitHub commits: `623aaaa`, `6aabb6c`, `5657405`, `7b2e3a2`, `4193060` | Completed; awaiting owner approval |
