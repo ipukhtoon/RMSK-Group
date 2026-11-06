@@ -75,3 +75,48 @@ Use these status labels consistently: `Not started`, `In progress`, `Completed`,
 - **Stage 5 Implementation & Verification:** Not started — no implementation authorized or performed.
 - **Current gate:** Await explicit owner approval of the refined Stage 3 database architecture scope before implementation planning or code changes.
 - **Evidence:** Stage playbooks and the Stage 3 updates listed in their run histories.
+
+
+## Goldfish QA — mandatory cross-stage perspective review
+
+**Goldfish QA is an additional review lens embedded across all five stages, not a sixth stage and not a replacement for the Architect, Critical Reviewer, Improvement or owner-approval workflow.** Its purpose is to inspect the product as if the reviewer were encountering it for the first time, without relying on internal project knowledge or assuming that a feature is obvious.
+
+### Required perspective personas
+Use the personas relevant to the workstream; do not force irrelevant personas into a technical-only task.
+- **First-time visitor:** Can they understand what the product does, who it serves and what to do next?
+- **New applicant / onboarding ISP owner:** Can they register, understand verification and approval, recover from mistakes and complete setup without hidden knowledge?
+- **ISP owner / administrator:** Can they safely manage the business, staff, packages, billing, integrations and settings?
+- **Frontline staff:** Can support agents, cashiers, accountants and network operators complete their actual tasks with only their assigned permissions?
+- **Subscriber:** Can they find their account, understand bills/payment/service status and complete self-service tasks without confusion?
+- **Platform operations/support:** Can RMSK staff diagnose and support a tenant without accidental or unjustified access to its private data?
+- **Mobile-first / constrained connectivity user:** Can the key journey work on a phone, with slow, intermittent or lost connectivity and clear recovery from pending/failed actions?
+- **Misuse / confused-user perspective:** What happens when someone enters the wrong identifier, repeats a payment/action, follows an expired link, changes tenant context, lacks permission or attempts an unintended action?
+
+### Goldfish QA method
+1. Start each scenario with only the information and permissions that persona would actually have. Do not use undocumented internal knowledge.
+2. State the persona's goal and walk through the complete journey step by step.
+3. At every step ask: What do I see? What do I understand? What action is available? What happens next? How do I know it worked? How do I recover if it failed?
+4. Look for hidden assumptions, unexplained terms, ambiguous statuses, missing feedback, unsafe defaults, dead ends, unnecessary steps and accidental data exposure.
+5. Test both the happy path and realistic failure/edge paths, including permission denial, duplicate action, stale data, network loss, timeout, retry and recovery where relevant.
+6. Record each finding with persona, scenario, expected outcome, observed/design outcome, severity, user/business/security impact, recommendation and acceptance test.
+7. Never invent test results. During design stages, label findings as predicted risks; during implementation, label them as tested only when actually executed and evidenced.
+
+### How Goldfish QA applies to the five stages
+- **Stage 1 — Architect:** Identify relevant personas and map their end-to-end journeys, assumptions and failure paths in the plan.
+- **Stage 2 — Critical Reviewer:** Independently replay the journeys as each relevant persona; challenge whether the design is understandable, safe and complete for someone without project context.
+- **Stage 3 — Improvement:** Resolve or explicitly defer Goldfish findings, refine flows and add persona-based acceptance criteria.
+- **Stage 4 — Owner Approval:** Present important persona findings, unresolved usability risks and explicit exclusions to the owner; approval remains the owner's decision.
+- **Stage 5 — Implementation & Verification:** Execute persona-based acceptance tests on the real implementation, including mobile/responsive and failure/recovery scenarios where applicable; record evidence and defects.
+
+Goldfish QA is mandatory for every substantial user-facing feature and workflow. For backend-only work, apply the relevant operational, support, security and failure-recovery personas. Record a reason when a persona is not applicable.
+
+
+## Goldfish QA run tracking
+Goldfish QA findings must be recorded in the relevant stage run history and acceptance/test records. They do not create a separate approval path. The owner remains the final decision-maker.
+
+### Goldfish QA baseline
+- **Status:** Added to the five-stage workflow on 2026-11-06.
+- **Run ID:** GOLD-01.
+- **Scope:** Cross-stage persona-based first-time-user, role-based, mobile/connectivity, support and misuse review.
+- **Result:** Workflow requirement documented; no product journeys or application code have been tested by this documentation update.
+- **Evidence:** `docs/stages/01-ARCHITECT.md` through `docs/stages/05-IMPLEMENTATION-VERIFICATION.md`, and `docs/TESTING_AND_ACCEPTANCE.md`.
