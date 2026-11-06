@@ -189,3 +189,49 @@ The owner should not be asked to approve a broad build until:
 ## 8. Audit boundary
 
 This review used the Markdown documentation on GitHub's `main` branch, including product vision, PRD, architecture, tenancy/data, security, payments, integrations/Bridge, roles, UX, operations, API/events, roadmap, testing, workflow, decisions, traceability, changelog, market positioning and stage playbooks. It did not inspect a running UI, application source code, database instance, payment gateway, Bridge binary or deployment environment. No implementation or production security test was performed.
+
+
+## 9. Stage 3 — Improved solution package (GQA-PLAN-01)
+
+The initial audit identified gaps. This improvement pass converts the broad recommendations into two reusable planning specifications:
+- [Product Discovery and MVP Definition Framework](PRODUCT_DISCOVERY_AND_MVP.md): structured Pakistani ISP discovery, non-leading interview guide, evidence quality, weighted prioritization, hard safety gates and an owner-controlled MVP decision record.
+- [Golden User Journeys and State Contracts](GOLDEN_JOURNEYS.md): seven end-to-end journeys with actors, proposed flows, state boundaries, failure/abuse cases and acceptance examples.
+
+### Finding-to-improvement disposition
+
+| Findings | Improved treatment | Remaining dependency |
+|---|---|---|
+| GQA-01 | Seven golden journeys now have common workflow contracts and scenario-level acceptance examples | Owner approval and detailed per-workflow state/permission decisions |
+| GQA-02 | Journey and discovery frameworks require source-of-truth and action-authority mapping per domain | ISP-specific mapping; conflict and reconciliation rules |
+| GQA-03 | Discovery guide, evidence record, scoring model, hard gates and MVP decision record added | Real ISP interviews and owner selection |
+| GQA-04 | Payment journey separates intent, provider transaction, invoice allocation and service activation; immutable corrections proposed | Approved ledger/accounting model, complete edge-case rules |
+| GQA-05 | Identity and account-linking are explicit preconditions across application and subscriber journeys | Auth provider, recovery, MFA/step-up and linking decisions |
+| GQA-06 | Application, provisioning, tenant, subscription and service states are kept distinct | Full tenant/subscription transition and suspension policy |
+| GQA-07 | Journeys require actor/action permissions; sensitive actions have explicit authorization gates | Complete resource/action permission catalogue and role matrix |
+| GQA-08 | All journeys require trusted tenant context and cross-tenant negative tests | Detailed RLS/context proof-of-concept and independent security review |
+| GQA-09 | Bridge journey defines enrollment, read-only validation, write authorization, expiry, replay and revocation expectations | Exact queueable action classes, ordering and protocol contract |
+| GQA-10 | Discovery framework captures pricing evidence and requires an owner-approved commercial record | Actual willingness-to-pay evidence and plan/pricing decisions |
+| GQA-11 | MVP/pilot decision record requires support owner, rollback and measurable operational assumptions | Approved SLO, RTO/RPO, support and capacity targets |
+| GQA-12 | Journeys require explicit adapter capability and integration validation before enabling writes | Canonical API/event schemas and version lifecycle |
+| GQA-13 | Discovery and launch planning identify legal/provider obligations as hard-gate research | Qualified Pakistan-specific legal, tax, telecom and payment advice |
+| GQA-14 | This report is the canonical GQA-PLAN-01 audit; stage histories and central tracker link it | Keep future runs additive and avoid duplicate competing status records |
+| GQA-15 | Journey framework requires mobile behavior, clear states and recovery | Language, accessibility and responsive design acceptance specification |
+| GQA-16 | MVP framework defines candidate measurable pilot indicators and baseline-before-target rule | Actual baseline, target values and owner approval |
+| GQA-17 | Audit boundary explicitly excludes code/runtime verification | Separate repository code/UI/security QA when implementation exists |
+
+### Improved MVP recommendation
+
+Do **not** choose Native, Integrated or Hybrid as the first pilot by assumption. The long-term product must support all three. The first pilot mode and first integration must be selected from customer evidence, available test access, delivery effort, supportability and risk. A read-only integration pilot may be a safer initial validation step where it demonstrates value without granting network write authority; it is a candidate, not a predetermined decision.
+
+### Recommended sequencing
+
+1. Conduct customer discovery and capture evidence before locking MVP scope.
+2. Select one narrow pilot outcome and one supported integration with explicit capability limits.
+3. Approve the golden journeys relevant to that pilot.
+4. Resolve data ownership, financial state and permission decisions for those journeys.
+5. Complete tenant security proof-of-concept and operational readiness gates.
+6. Only then submit a bounded implementation proposal for Stage 4 approval.
+
+### Stage 3 conclusion
+
+Stage 3 improvement documentation is complete for this planning pass. It does not mean the findings are implemented, real ISP demand is validated, any integration is certified, or the owner has approved the proposed MVP. Stage 4 remains pending.
