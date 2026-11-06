@@ -31,3 +31,13 @@ For every future explicitly approved feature or business/technical decision, add
 - Required separate application, tenant lifecycle and SaaS subscription/billing states; approval alone does not activate a paid subscription or mark an ISP live.
 - Updated PRD, architecture, decision log and requirements traceability.
 - This is a documented product requirement; no application code has been implemented.
+
+## 2026-11-06 — Backend and database technology foundation approved
+- Approved NestJS with Node.js/TypeScript as the central backend framework and business-logic authority.
+- Approved PostgreSQL as the primary relational database, initially managed/hosted through Supabase, with a portability guardrail against unnecessary Supabase-specific lock-in.
+- Approved Prisma as the ORM/data-access layer.
+- Approved Redis with BullMQ for cache and asynchronous background jobs.
+- Approved Go for the local RMSK Bridge.
+- Recorded that this is a technology-direction decision, not an implementation or production-readiness claim.
+- Left tenant schema strategy, exact RLS policies, Supabase plan, Redis provider, deployment topology, pooling, backups and production sizing open for detailed design.
+- Updated architecture, tenancy/data, decision log and requirements traceability. No application code was implemented by this documentation change.
