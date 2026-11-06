@@ -37,3 +37,11 @@ This register links approved product direction to documentation and future valid
 - **Rejected:** Explicitly declined.
 
 Do not mark a requirement implemented or verified based only on documentation.
+
+
+| ONB-001 | Public ISP application with verified contact channels | Approved | PRD, DECISIONS | Application and contact-verification tests |
+| ONB-002 | Authorized RMSK review with explicit approve/reject decisions and audit trail | Approved | PRD, SECURITY | Role, decision and audit tests |
+| ONB-003 | Provision tenant and initial owner account only after approval | Approved | PRD, ARCHITECTURE | Provisioning, idempotency and failure-recovery tests |
+| ONB-004 | Separate application, tenant and SaaS subscription lifecycle states | Approved | PRD, ARCHITECTURE, PAYMENTS_AND_LEDGER | State-transition and billing-isolation tests |
+| ONB-005 | Mode-aware ISP onboarding wizard; do not force existing-backend migration | Approved | PRD, ARCHITECTURE | Native/Integrated/Hybrid onboarding acceptance tests |
+| ONB-006 | Keep exact fields, verification policy, pricing and go-live criteria open until specified | Approved constraint | PRD, DECISIONS | Review detailed specifications before implementation |
