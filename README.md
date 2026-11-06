@@ -65,3 +65,7 @@ Every substantial workstream follows the five mandatory stages, with a dedicated
 - [Workflow and current run tracker](docs/WORKFLOW.md)
 
 **Tracking rule:** After every stage run, update its run history and the central tracker with the outcome, status, evidence, unresolved issues and commit reference. Approval is scope-specific; no implementation starts before explicit Stage 4 approval.
+
+
+## Goldfish QA
+The five-stage workflow includes **Goldfish QA** as a mandatory cross-stage review lens. It simulates relevant first-time visitors, ISP applicants/owners, staff roles, subscribers, platform support, mobile/constrained-connectivity users and confused/misuse scenarios. It is integrated into all five stages; it is not a separate sixth stage. See [Owner workflow](docs/WORKFLOW.md) and [Testing & acceptance](docs/TESTING_AND_ACCEPTANCE.md).
