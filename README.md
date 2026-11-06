@@ -73,3 +73,12 @@ The five-stage workflow includes **Goldfish QA** as a mandatory cross-stage revi
 
 ## Planning quality review
 A documentation-only Goldfish QA review of the product plan is recorded in [Goldfish QA — Repository and Product Planning Audit](docs/GOLDFISH_AUDIT.md). It identifies persona journey gaps, planning risks and a prioritized path toward an implementation-ready MVP. Findings are proposals, not approved product changes; no application code or runtime behavior was tested.
+
+
+## Goldfish planning improvements
+The Goldfish planning audit has been improved with:
+- [Product Discovery and MVP Definition Framework](docs/PRODUCT_DISCOVERY_AND_MVP.md) — ISP interview guide, evidence records, MVP scoring, hard gates and pilot decision record.
+- [Golden User Journeys and State Contracts](docs/GOLDEN_JOURNEYS.md) — seven end-to-end journeys with actors, state boundaries, failure cases and acceptance examples.
+- [Goldfish Audit](docs/GOLDFISH_AUDIT.md) — 17 findings and finding-to-improvement dispositions.
+
+The first pilot mode, target ISP segment, vendor/integration, pricing and MVP scope remain undecided pending real discovery evidence and explicit owner approval. No application code or runtime behavior was changed.
