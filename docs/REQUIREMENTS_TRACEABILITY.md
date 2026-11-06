@@ -62,3 +62,19 @@ Do not mark a requirement implemented or verified based only on documentation.
 | TEN-007 | Prevent tenant-context leakage across pooled connections and concurrent requests | Approved security requirement | TENANCY_AND_DATA, SECURITY | Prisma/pool concurrency and connection-reuse tests |
 | TEN-008 | Automated cross-tenant negative testing is required before production | Approved release requirement | TENANCY_AND_DATA, SECURITY | Security test suite and release gate |
 | TEN-009 | Preserve future dedicated-database isolation tier option | Approved evolution constraint | ARCHITECTURE, TENANCY_AND_DATA | Architecture review before tier introduction |
+
+
+## Stage 3 — Detailed tenancy/security improvement requirements (proposed; pending owner approval)
+
+| ID | Requirement | Status | Primary document | Future verification |
+|---|---|---|---|---|
+| TEN-010 | Tenant context must be established transaction-locally on the same Prisma transaction/connection as tenant queries; session-level tenant state is prohibited | Proposed | ARCHITECTURE, TENANCY_AND_DATA | Concurrent pooled-connection and rollback/timeout tests |
+| TEN-011 | Document the threat limitation of freely settable PostgreSQL custom tenant settings; select a context assertion only after threat-model review | Proposed | ARCHITECTURE, SECURITY | Forged-context and compromised-role proof-of-concept |
+| TEN-012 | Runtime API/worker credentials are separate from migration and operations credentials and cannot own tenant tables or bypass RLS | Proposed | SECURITY, ARCHITECTURE | Privilege inspection and bypass-attempt tests |
+| TEN-013 | RLS policy composition must preserve a restrictive tenant boundary; policy additions are reviewed for permissive OR widening | Proposed | SECURITY, TENANCY_AND_DATA | Policy-composition regression tests |
+| TEN-014 | Tenant-owned relationships use database-enforced composite foreign keys and unique constraints | Proposed refinement | TENANCY_AND_DATA | Migration/schema inspection and cross-tenant FK tests |
+| TEN-015 | Async jobs, callbacks and Bridge commands revalidate trusted tenant/entity binding at execution | Proposed | ARCHITECTURE, SECURITY | Forged/mismatched job, callback and Bridge tests |
+| TEN-016 | Cache, search, files, WebSockets, notifications, reports and exports enforce tenant scope independently | Proposed | ARCHITECTURE, TENANCY_AND_DATA, SECURITY | Cross-layer isolation tests |
+| TEN-017 | Platform support and break-glass access use scoped, time-limited, reason-coded and audited grants | Proposed | ARCHITECTURE, SECURITY | Authorization, expiry and audit tests |
+| TEN-018 | Provisioning, suspension, offboarding and recovery have idempotent workflows and tested lifecycle safeguards | Proposed | ARCHITECTURE, TENANCY_AND_DATA | Retry, lifecycle and restore-drill tests |
+| TEN-019 | Production security gate includes adversarial tenant-isolation tests and independent security review | Proposed | SECURITY, TESTING_AND_ACCEPTANCE | Release checklist and review evidence |
