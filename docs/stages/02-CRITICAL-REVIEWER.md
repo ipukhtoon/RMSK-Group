@@ -43,3 +43,5 @@ Stage 2 is complete when findings are recorded and handed to Stage 3. Record the
 
 ## Goldfish QA
 Independently replay relevant journeys as a person with no internal project knowledge. At each step ask what the persona sees, understands, can do, expects next and how they know success or failure. Identify hidden assumptions, unclear labels/statuses, dead ends, permission surprises, unsafe defaults and missing recovery. Record persona, scenario, expected outcome, design gap, severity, impact and testable recommendation. This supplements, not replaces, technical and security review.
+
+| GQA-PLAN-01 | 2026-11-06 | Repository and product-planning Goldfish audit | Independently classified 17 planning/documentation findings, including 8 High-severity items; no runtime/code/security tests were performed | `docs/GOLDFISH_AUDIT.md` (commit `ec21b7506b27c37e1b0042ab74e65deaa59831ca`) | Completed; design review only |
