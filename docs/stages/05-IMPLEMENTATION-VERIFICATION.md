@@ -54,3 +54,7 @@ A run is complete only when implementation and verification evidence are recorde
 | Run | Date | Workstream | Result | Evidence / commit | Status |
 |---|---|---|---|---|---|
 | DB-ARCH-01 | 2026-11-06 | Detailed database architecture | No implementation authorized or performed | Stage 4 approval pending | Not started |
+
+
+## Goldfish QA
+Execute approved persona scenarios against the actual implementation. Verify first-time comprehension, role-appropriate permissions, task completion, clear success/failure/pending feedback, duplicate-action safety, mobile responsiveness and recovery from network/timeouts where relevant. Record each scenario as Passed, Failed, Blocked, Not Run or Not Applicable with evidence/reason. Do not convert a design walkthrough into a passed test.
